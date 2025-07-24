@@ -50,6 +50,12 @@ export default function Home() {
         {/* Canonical URL */}
         <link rel="canonical" href="https://growthauthority.com/" />
         
+        {/* Favicon - Modern Minimal Setup */}
+        <link rel="icon" href="/favicon.ico" sizes="32x32" />
+        <link rel="icon" href="/icon.svg" type="image/svg+xml" />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+        <link rel="manifest" href="/manifest.webmanifest" />
+        
         {/* Structured Data */}
         <script
           type="application/ld+json"

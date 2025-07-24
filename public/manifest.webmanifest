@@ -1,0 +1,27 @@
+{
+  "name": "Growth Authority",
+  "short_name": "Growth Authority",
+  "description": "The private membership for CMOs and leaders who drive growth",
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#fe3102",
+  "background_color": "#161519",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "/icon-mask.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/icon-512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ]
+} 
