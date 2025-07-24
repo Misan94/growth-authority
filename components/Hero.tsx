@@ -5,11 +5,31 @@ export default function Hero() {
   const [currentText, setCurrentText] = useState('')
   const [currentIndex, setCurrentIndex] = useState(0)
   const [isDeleting, setIsDeleting] = useState(false)
+  const [videoCanPlay, setVideoCanPlay] = useState(true)
+  const [isMobile, setIsMobile] = useState(false)
   
   const words = ['Growth', 'Revenue', 'Acquisition', 'Retention']
 
   useEffect(() => {
     setIsClient(true)
+    
+    // Detect mobile devices
+    const checkMobile = () => {
+      const userAgent = navigator.userAgent || navigator.vendor || (window as any).opera
+      const mobileRegex = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i
+      const isMobileDevice = mobileRegex.test(userAgent) || window.innerWidth <= 768
+      setIsMobile(isMobileDevice)
+      
+      // On mobile, assume video might not autoplay
+      if (isMobileDevice) {
+        setVideoCanPlay(false)
+      }
+    }
+    
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+    
+    return () => window.removeEventListener('resize', checkMobile)
   }, [])
 
   useEffect(() => {
@@ -51,23 +71,90 @@ export default function Hero() {
   }
 
   const handleVideoLoad = (e: React.SyntheticEvent<HTMLVideoElement>) => {
-    // Fade in the video once it's ready to play
-    e.currentTarget.style.opacity = '1'
+    const video = e.currentTarget
+    
+    // Try to play the video
+    const playPromise = video.play()
+    
+    if (playPromise !== undefined) {
+      playPromise
+        .then(() => {
+          // Video started playing successfully
+          setVideoCanPlay(true)
+          video.style.opacity = '1'
+        })
+        .catch((error) => {
+          // Auto-play was prevented, use fallback
+          console.log('Video autoplay prevented:', error)
+          setVideoCanPlay(false)
+          video.style.display = 'none'
+        })
+    }
+  }
+  
+  const handleVideoError = () => {
+    // Video failed to load, use fallback
+    setVideoCanPlay(false)
+  }
+  
+  const handleVideoCanPlay = (e: React.SyntheticEvent<HTMLVideoElement>) => {
+    const video = e.currentTarget
+    
+    // For mobile devices, don't auto-fade in the video
+    if (!isMobile) {
+      handleVideoLoad(e)
+    } else {
+      // On mobile, try to play but expect it might fail
+      const playPromise = video.play()
+      if (playPromise !== undefined) {
+        playPromise.catch(() => {
+          setVideoCanPlay(false)
+          video.style.display = 'none'
+        })
+      }
+    }
+  }
+
+  const handleHeroClick = () => {
+    if (isMobile && !videoCanPlay) {
+      const video = document.querySelector('.hero-video') as HTMLVideoElement
+      if (video) {
+        video.style.display = 'block'
+        const playPromise = video.play()
+        if (playPromise !== undefined) {
+          playPromise
+            .then(() => {
+              setVideoCanPlay(true)
+              video.style.opacity = '1'
+            })
+            .catch(() => {
+              video.style.display = 'none'
+            })
+        }
+      }
+    }
   }
 
   if (!isClient) return null
 
   return (
-    <section className="hero">
+    <section className="hero" onClick={handleHeroClick}>
       <div className="hero-video-container">
+        {/* Fallback background for mobile/when video fails */}
+        <div className={`hero-fallback-bg ${!videoCanPlay || isMobile ? 'active' : ''}`}></div>
+        
+        {/* Video background - optimized for mobile */}
         <video 
           className="hero-video"
-          autoPlay
+          autoPlay={!isMobile}
           loop
           muted
           playsInline
-          preload="auto"
-          onCanPlay={handleVideoLoad}
+          webkit-playsinline="true"
+          preload={isMobile ? "none" : "metadata"}
+          onCanPlay={handleVideoCanPlay}
+          onError={handleVideoError}
+          onLoadStart={() => !isMobile && setVideoCanPlay(true)}
         >
           <source src="https://cdn.midjourney.com/video/fb2bc20f-5561-4917-b02d-021627ee4e56/1.mp4" type="video/mp4" />
           Your browser does not support the video tag.
