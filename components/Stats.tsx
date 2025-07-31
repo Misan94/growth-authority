@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useState, useRef, useEffect } from 'react'
 
 interface StatItemProps {
   target: number
@@ -57,9 +57,9 @@ export default function Stats() {
     <section className="stats-section">
       <div className="container">
         <div className="stats-grid">
-          <StatItem target={300} suffix="k+" label="Community members" />
-          <StatItem target={40} suffix="+" label="Certifications" />
-          <StatItem target={5} suffix="k+" label="Event attendees" />
+          <StatItem target={100} suffix="+" label="Marketing resources" />
+          <StatItem target={40} suffix="+" label="Courses" />
+          <StatItem target={10} suffix="+" label="Marketing tools" />
         </div>
       </div>
     </section>

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 interface FormData {
   // About You section only
@@ -22,6 +22,31 @@ export default function WaitlistForm() {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submissionStatus, setSubmissionStatus] = useState<'idle' | 'success' | 'error'>('idle')
   const [statusMessage, setStatusMessage] = useState('')
+  
+  // Video background state
+  const [videoCanPlay, setVideoCanPlay] = useState(false)
+  const [isMobile, setIsMobile] = useState(false)
+  const [isClient, setIsClient] = useState(false)
+
+  useEffect(() => {
+    setIsClient(true)
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768 || /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent))
+    }
+    
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+    return () => window.removeEventListener('resize', checkMobile)
+  }, [])
+
+  const handleVideoCanPlay = () => {
+    setVideoCanPlay(true)
+  }
+
+  const handleVideoError = () => {
+    console.log('Video failed to load, showing fallback background')
+    setVideoCanPlay(false)
+  }
 
   const handleInputChange = (field: keyof FormData, value: string) => {
     setFormData(prev => ({
@@ -93,6 +118,27 @@ export default function WaitlistForm() {
   if (submissionStatus === 'success') {
     return (
       <section className="waitlist-form-section">
+        {/* Video Background */}
+        <div className="waitlist-video-container">
+          <div className={`waitlist-fallback-bg ${!videoCanPlay || isMobile ? 'active' : ''}`}></div>
+          
+          <video 
+            className={`waitlist-video ${videoCanPlay ? 'loaded' : ''}`}
+            autoPlay={!isMobile}
+            loop
+            muted
+            playsInline
+            webkit-playsinline="true"
+            preload={isMobile ? "none" : "metadata"}
+            onCanPlay={handleVideoCanPlay}
+            onError={handleVideoError}
+            onLoadStart={() => !isMobile && setVideoCanPlay(true)}
+          >
+            <source src="https://cdn.midjourney.com/video/5f8f95c6-3cce-4bb0-bc29-f211a6ed1a78/0.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+        </div>
+        
         <div className="container">
           <div className="form-header">
             <h2>Thank You!</h2>
@@ -112,8 +158,31 @@ export default function WaitlistForm() {
     )
   }
 
+  if (!isClient) return null
+
   return (
     <section className="waitlist-form-section">
+      {/* Video Background */}
+      <div className="waitlist-video-container">
+        <div className={`waitlist-fallback-bg ${!videoCanPlay || isMobile ? 'active' : ''}`}></div>
+        
+        <video 
+          className={`waitlist-video ${videoCanPlay ? 'loaded' : ''}`}
+          autoPlay={!isMobile}
+          loop
+          muted
+          playsInline
+          webkit-playsinline="true"
+          preload={isMobile ? "none" : "metadata"}
+          onCanPlay={handleVideoCanPlay}
+          onError={handleVideoError}
+          onLoadStart={() => !isMobile && setVideoCanPlay(true)}
+        >
+          <source src="https://cdn.midjourney.com/video/5f8f95c6-3cce-4bb0-bc29-f211a6ed1a78/0.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+      </div>
+      
       <div className="container">
         <div className="form-header">
           <h2>Join the Growth Authority Waitlist</h2>

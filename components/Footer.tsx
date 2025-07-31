@@ -36,40 +36,52 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Community Section */}
-          <div className="footer-section">
-            <h3 className="section-title">Community</h3>
-            <ul className="section-links">
-              <li><a href="#">Join Waitlist</a></li>
-              <li><a href="#">Slack Workspace</a></li>
-              <li><a href="#">Member Directory</a></li>
-              <li><a href="#">Local Chapters</a></li>
-              <li><a href="#">Success Stories</a></li>
-            </ul>
-          </div>
+          {/* Footer Sections Grid */}
+          <div className="footer-sections-grid">
+            {/* Community Section */}
+            <div className="footer-section">
+              <h3 className="section-title">Community</h3>
+              <ul className="section-links">
+                <li><a href="#">Join Waitlist</a></li>
+                <li><a href="#">Slack Workspace</a></li>
+                <li><a href="#">Member Directory</a></li>
+                <li><a href="#">Local Chapters</a></li>
+                <li><a href="#">Success Stories</a></li>
+              </ul>
+            </div>
 
-          {/* Resources Section */}
-          <div className="footer-section">
-            <h3 className="section-title">Resources</h3>
-            <ul className="section-links">
-              <li><a href="#">Playbooks</a></li>
-              <li><a href="#">Templates</a></li>
-              <li><a href="#">Case Studies</a></li>
-              <li><a href="#">Tools & Calculators</a></li>
-              <li><a href="#">Live Sessions</a></li>
-            </ul>
-          </div>
+            {/* Resources Section */}
+            <div className="footer-section">
+              <h3 className="section-title">Resources</h3>
+              <ul className="section-links">
+                <li><a href="#">Playbooks</a></li>
+                <li><a href="#">Templates</a></li>
+                <li><a href="#">Case Studies</a></li>
+                <li><a href="#">Tools & Calculators</a></li>
+                <li><a href="#">Live Sessions</a></li>
+              </ul>
+            </div>
 
-          {/* Company Section */}
-          <div className="footer-section">
-            <h3 className="section-title">Company</h3>
-            <ul className="section-links">
-              <li><a href="#">About Us</a></li>
-              <li><a href="#">Careers</a></li>
-              <li><a href="#">Press</a></li>
-              <li><a href="#">Contact</a></li>
-              <li><a href="#">Partner Program</a></li>
-            </ul>
+            {/* Company Section */}
+            <div className="footer-section">
+              <h3 className="section-title">Company</h3>
+              <ul className="section-links">
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">Careers</a></li>
+                <li><a href="#">Press</a></li>
+              </ul>
+            </div>
+
+            {/* Support Section */}
+            <div className="footer-section">
+              <h3 className="section-title">Support</h3>
+              <ul className="section-links">
+                <li><a href="#">Contact</a></li>
+                <li><a href="#">FAQ</a></li>
+                <li><a href="#">Help Center</a></li>
+                <li><a href="#">Partner Program</a></li>
+              </ul>
+            </div>
           </div>
         </div>
 

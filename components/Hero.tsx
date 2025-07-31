@@ -70,96 +70,33 @@ export default function Hero() {
     // In a real app, this would handle the waitlist signup
   }
 
-  const handleVideoLoad = (e: React.SyntheticEvent<HTMLVideoElement>) => {
-    const video = e.currentTarget
-    
-    // Try to play the video
-    const playPromise = video.play()
-    
-    if (playPromise !== undefined) {
-      playPromise
-        .then(() => {
-          // Video started playing successfully
-          setVideoCanPlay(true)
-          video.style.opacity = '1'
-        })
-        .catch((error) => {
-          // Auto-play was prevented, use fallback
-          console.log('Video autoplay prevented:', error)
-          setVideoCanPlay(false)
-          video.style.display = 'none'
-        })
-    }
+  const handleImageLoad = (e: React.SyntheticEvent<HTMLImageElement>) => {
+    // Image loaded successfully
+    setVideoCanPlay(true) // Using same state name for consistency
   }
   
-  const handleVideoError = () => {
-    // Video failed to load, use fallback
+  const handleImageError = () => {
+    // Image failed to load, use fallback
+    console.log('Hero image failed to load, showing fallback background')
     setVideoCanPlay(false)
-  }
-  
-  const handleVideoCanPlay = (e: React.SyntheticEvent<HTMLVideoElement>) => {
-    const video = e.currentTarget
-    
-    // For mobile devices, don't auto-fade in the video
-    if (!isMobile) {
-      handleVideoLoad(e)
-    } else {
-      // On mobile, try to play but expect it might fail
-      const playPromise = video.play()
-      if (playPromise !== undefined) {
-        playPromise.catch(() => {
-          setVideoCanPlay(false)
-          video.style.display = 'none'
-        })
-      }
-    }
-  }
-
-  const handleHeroClick = () => {
-    if (isMobile && !videoCanPlay) {
-      const video = document.querySelector('.hero-video') as HTMLVideoElement
-      if (video) {
-        video.style.display = 'block'
-        const playPromise = video.play()
-        if (playPromise !== undefined) {
-          playPromise
-            .then(() => {
-              setVideoCanPlay(true)
-              video.style.opacity = '1'
-            })
-            .catch(() => {
-              video.style.display = 'none'
-            })
-        }
-      }
-    }
   }
 
   if (!isClient) return null
 
   return (
-    <section className="hero" onClick={handleHeroClick}>
+    <section className="hero">
       <div className="hero-video-container">
-        {/* Fallback background for mobile/when video fails */}
-        <div className={`hero-fallback-bg ${!videoCanPlay || isMobile ? 'active' : ''}`}></div>
+        {/* Fallback background - hidden by default since image loads reliably */}
+        <div className={`hero-fallback-bg ${!videoCanPlay ? 'active' : ''}`}></div>
         
-        {/* Video background - optimized for mobile */}
-        <video 
-          className="hero-video"
-          autoPlay={!isMobile}
-          loop
-          muted
-          playsInline
-          webkit-playsinline="true"
-          preload={isMobile ? "none" : "metadata"}
-          onCanPlay={handleVideoCanPlay}
-          onError={handleVideoError}
-          onLoadStart={() => !isMobile && setVideoCanPlay(true)}
-        >
-          <source src="https://cdn.midjourney.com/video/fb2bc20f-5561-4917-b02d-021627ee4e56/1.mp4" type="video/mp4" />
-          Your browser does not support the video tag.
-        </video>
-        <div className="hero-overlay"></div>
+        {/* Image background - displays on all devices */}
+        <img 
+          className={`hero-image ${videoCanPlay ? 'loaded' : ''}`}
+          src="https://cdn.midjourney.com/414ce1ca-d9b3-48e4-95ce-2136baeaac8a/0_0.png"
+          alt="Growth Authority Hero Background"
+          onLoad={handleImageLoad}
+          onError={handleImageError}
+        />
       </div>
       <div className="container">
         <div className="hero-content">

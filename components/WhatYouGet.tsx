@@ -1,50 +1,69 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 export default function WhatYouGet() {
-  const [activeCategory, setActiveCategory] = useState<number | null>(null)
+  const [activeIndex, setActiveIndex] = useState<number>(0)
 
-  const categories = [
+  const benefits = [
     {
+      number: "01",
       title: "Content & Resources",
-      color: "gradient-primary",
-      benefits: [
-        "Weekly insights on marketing strategy, AI, and performance",
-        "Proven toolkits, templates, and dashboards - ready to use",
-        "Playbooks for attribution, creative ops, team structure, and media mix",
-        "Exclusive behind-the-scenes from premium growth strategies"
-      ]
+      description: "Weekly insights, proven toolkits, playbooks for attribution and team structure, plus exclusive behind-the-scenes growth strategies.",
+      features: [
+        "Weekly growth insights & case studies",
+        "Proven marketing toolkits & frameworks", 
+        "Attribution & team structure playbooks",
+        "Behind-the-scenes growth strategies"
+      ],
+      imagePlaceholder: "content-resources-visual.jpg"
     },
     {
-      title: "Community & Support", 
-      color: "gradient-secondary",
-      benefits: [
-        "Access to a private member-only group",
-        "Monthly live sessions, audits, and expert drop-ins",
-        "Networking opportunities with marketing leaders",
-        "1:1 Peer Matching for targeted mentorship"
-      ]
+      number: "02", 
+      title: "Community & Support",
+      description: "Private member group, monthly live sessions with experts, networking with marketing leaders, and 1:1 peer matching.",
+      features: [
+        "Private CMO community access",
+        "Monthly expert-led live sessions",
+        "Marketing leader networking events", 
+        "1:1 peer matching program"
+      ],
+      imagePlaceholder: "community-support-visual.jpg"
     },
     {
-      title: "Tools & Career Growth",
-      color: "gradient-primary",
-      benefits: [
-        "Early access to our SaaS tools + prompt libraries",
-        "Job Listings for Marketing Leaders",
-        "Extensive PR Exposure to build your personal brand",
-        "Help CMOs advance careers or hire effectively"
-      ]
+      number: "03",
+      title: "Tools & Career Growth", 
+      description: "Early access to SaaS tools, job listings for marketing leaders, PR exposure opportunities, and career advancement support.",
+      features: [
+        "Early access to cutting-edge SaaS tools",
+        "Exclusive marketing leadership job board",
+        "PR exposure & thought leadership opportunities",
+        "Career advancement mentorship"
+      ],
+      imagePlaceholder: "tools-career-visual.jpg"
     },
     {
+      number: "04",
       title: "Exclusive Experiences",
-      color: "gradient-secondary", 
-      benefits: [
-        "High-Impact Exclusive Events and CMO dinners",
-        "Forums and visionaries' sessions",
-        "Thought leadership opportunities",
-        "Future trends and strategic insights"
-      ]
+      description: "High-impact events, CMO dinners, visionary forums, thought leadership opportunities, and strategic insights.",
+      features: [
+        "High-impact industry events",
+        "Intimate CMO dinner experiences", 
+        "Visionary leadership forums",
+        "Strategic partnership opportunities"
+      ],
+      imagePlaceholder: "exclusive-experiences-visual.jpg"
     }
   ]
+
+  // Auto-loop functionality
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActiveIndex((prevIndex) => 
+        prevIndex === benefits.length - 1 ? 0 : prevIndex + 1
+      )
+    }, 10000) // 10 seconds
+
+    return () => clearInterval(interval)
+  }, [benefits.length])
 
   return (
     <section id="benefits" className="what-you-get-section">
@@ -56,32 +75,81 @@ export default function WhatYouGet() {
           </p>
         </div>
 
-        <div className="benefits-grid">
-          {categories.map((category, index) => (
-            <div
-              key={index}
-              className={`benefit-category ${activeCategory === index ? 'active' : ''}`}
-              onMouseEnter={() => setActiveCategory(index)}
-              onMouseLeave={() => setActiveCategory(null)}
-            >
-              <div className="category-header">
-                <h3 className="category-title">{category.title}</h3>
-              </div>
-              <div className="benefits-list">
-                {category.benefits.map((benefit, benefitIndex) => (
-                  <div key={benefitIndex} className="benefit-item">
-                    <div className="benefit-check">
-                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M20 6L9 17l-5-5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                      </svg>
-                    </div>
-                    <p className="benefit-text">{benefit}</p>
+        <div className="showcase-container">
+          {/* Main Showcase Area */}
+          <div className="showcase-main">
+            <div className="showcase-image">
+              {activeIndex === 0 ? (
+                <img 
+                  src="/content-and-resources.png" 
+                  alt="Content & Resources"
+                  className="benefit-showcase-img"
+                />
+              ) : activeIndex === 1 ? (
+                <img 
+                  src="/community.png" 
+                  alt="Community & Support"
+                  className="benefit-showcase-img"
+                />
+              ) : activeIndex === 2 ? (
+                <img 
+                  src="/career-growth.png" 
+                  alt="Tools & Career Growth"
+                  className="benefit-showcase-img"
+                />
+              ) : activeIndex === 3 ? (
+                <img 
+                  src="/events.png" 
+                  alt="Exclusive Experiences"
+                  className="benefit-showcase-img"
+                />
+              ) : (
+                <div className="image-placeholder">
+                  <span className="placeholder-text">📸 {benefits[activeIndex].imagePlaceholder}</span>
+                  <div className="placeholder-overlay">
+                    <span className="placeholder-icon">🖼️</span>
                   </div>
-                ))}
-              </div>
-              <div className="category-overlay"></div>
+                </div>
+              )}
             </div>
-          ))}
+            
+            <div className="showcase-content">
+              <div className="showcase-number">{benefits[activeIndex].number}</div>
+              <h3 className="showcase-title">{benefits[activeIndex].title}</h3>
+              <p className="showcase-description">{benefits[activeIndex].description}</p>
+              
+              <ul className="showcase-features">
+                {benefits[activeIndex].features.map((feature, index) => (
+                  <li key={index} className="feature-item">
+                    <span className="feature-icon">✓</span>
+                    {feature}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+
+          {/* Interactive Menu List */}
+          <div className="showcase-menu">
+            <h4 className="menu-title">Benefits Overview</h4>
+            <div className="menu-list">
+              {benefits.map((benefit, index) => (
+                <div
+                  key={index}
+                  className={`menu-item ${activeIndex === index ? 'active' : ''}`}
+                  onClick={() => setActiveIndex(index)}
+                >
+                  <div className="menu-number">{benefit.number}</div>
+                  <div className="menu-content">
+                    <h5 className="menu-item-title">{benefit.title}</h5>
+                    <div className="menu-indicator">
+                      <span className="indicator-arrow">→</span>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
 
         <div className="bottom-cta">
