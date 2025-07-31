@@ -1,25 +1,24 @@
 {
   "name": "Growth Authority",
   "short_name": "Growth Authority",
-  "description": "The private membership for CMOs and leaders who drive growth",
+  "description": "The private membership for CMOs and marketing leaders who drive growth",
   "start_url": "/",
   "display": "standalone",
   "theme_color": "#fe3102",
   "background_color": "#161519",
   "icons": [
     {
-      "src": "/icon-192.png",
+      "src": "/apple-touch-icon.png",
       "type": "image/png",
-      "sizes": "192x192"
+      "sizes": "180x180"
     },
     {
-      "src": "/icon-mask.png",
+      "src": "/logoshort.png",
       "type": "image/png",
-      "sizes": "512x512",
-      "purpose": "maskable"
+      "sizes": "300x300"
     },
     {
-      "src": "/icon-512.png",
+      "src": "/logoshort.png",
       "type": "image/png",
       "sizes": "512x512"
     }

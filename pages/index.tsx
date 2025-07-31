@@ -19,7 +19,7 @@ export default function Home() {
       <CustomCursor />
       <Head>
         <title>Growth Authority - The Private Membership for CMOs and Marketing Leaders</title>
-        <meta name="description" content="The private membership for CMOs and leaders who drive growth. Get weekly insights, proven toolkits, exclusive access, and everything designed to save you time and hit your KPIs." />
+        <meta name="description" content="The private membership for CMOs and marketing leaders who drive growth. Get weekly insights, proven toolkits, exclusive access, and everything designed to save you time and hit your KPIs." />
         <meta name="keywords" content="CMO, marketing leaders, growth marketing, AI marketing, performance marketing, revenue engine, marketing community, executive membership" />
         <meta name="author" content="Growth Authority" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes" />
@@ -32,14 +32,14 @@ export default function Home() {
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://growthauthority.com/" />
         <meta property="og:title" content="Growth Authority - The Private Membership for CMOs and Marketing Leaders" />
-        <meta property="og:description" content="The private membership for CMOs and leaders who drive growth. Get weekly insights, proven toolkits, exclusive access, and everything designed to save you time and hit your KPIs." />
+        <meta property="og:description" content="The private membership for CMOs and marketing leaders who drive growth. Get weekly insights, proven toolkits, exclusive access, and everything designed to save you time and hit your KPIs." />
         <meta property="og:image" content="https://growthauthority.com/og-image.jpg" />
 
         {/* Twitter */}
         <meta property="twitter:card" content="summary_large_image" />
         <meta property="twitter:url" content="https://growthauthority.com/" />
         <meta property="twitter:title" content="Growth Authority - The Private Membership for CMOs and Marketing Leaders" />
-        <meta property="twitter:description" content="The private membership for CMOs and leaders who drive growth. Get weekly insights, proven toolkits, exclusive access, and everything designed to save you time and hit your KPIs." />
+        <meta property="twitter:description" content="The private membership for CMOs and marketing leaders who drive growth. Get weekly insights, proven toolkits, exclusive access, and everything designed to save you time and hit your KPIs." />
         <meta property="twitter:image" content="https://growthauthority.com/og-image.jpg" />
 
         {/* Additional SEO */}

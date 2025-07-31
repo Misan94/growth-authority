@@ -6,7 +6,6 @@ export default function WhatYouGet() {
   const categories = [
     {
       title: "Content & Resources",
-      icon: "📚",
       color: "gradient-primary",
       benefits: [
         "Weekly insights on marketing strategy, AI, and performance",
@@ -17,7 +16,6 @@ export default function WhatYouGet() {
     },
     {
       title: "Community & Support", 
-      icon: "🤝",
       color: "gradient-secondary",
       benefits: [
         "Access to a private member-only group",
@@ -28,7 +26,6 @@ export default function WhatYouGet() {
     },
     {
       title: "Tools & Career Growth",
-      icon: "🚀", 
       color: "gradient-primary",
       benefits: [
         "Early access to our SaaS tools + prompt libraries",
@@ -39,7 +36,6 @@ export default function WhatYouGet() {
     },
     {
       title: "Exclusive Experiences",
-      icon: "👑",
       color: "gradient-secondary", 
       benefits: [
         "High-Impact Exclusive Events and CMO dinners",
@@ -69,13 +65,16 @@ export default function WhatYouGet() {
               onMouseLeave={() => setActiveCategory(null)}
             >
               <div className="category-header">
-                <div className="category-icon">{category.icon}</div>
                 <h3 className="category-title">{category.title}</h3>
               </div>
               <div className="benefits-list">
                 {category.benefits.map((benefit, benefitIndex) => (
                   <div key={benefitIndex} className="benefit-item">
-                    <div className="benefit-check">✓</div>
+                    <div className="benefit-check">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M20 6L9 17l-5-5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                      </svg>
+                    </div>
                     <p className="benefit-text">{benefit}</p>
                   </div>
                 ))}

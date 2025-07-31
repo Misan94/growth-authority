@@ -6,22 +6,18 @@ export default function WhyExists() {
   const challenges = [
     {
       title: "Drive pipeline and hit revenue targets",
-      icon: "📈",
       description: "Every quarter, the pressure mounts to deliver measurable results that directly impact the bottom line."
     },
     {
       title: "Stay ahead of AI and MarTech shifts", 
-      icon: "🤖",
       description: "The technology landscape evolves daily, and staying current while implementing effectively is crucial."
     },
     {
       title: "Build high-performing teams with lean budgets",
-      icon: "👥", 
       description: "Do more with less while maintaining quality and keeping your team motivated and engaged."
     },
     {
       title: "Justify every dollar to a CFO who doesn't speak marketing",
-      icon: "💰",
       description: "Translate marketing impact into financial language that resonates with executive leadership."
     }
   ]
@@ -52,7 +48,6 @@ export default function WhyExists() {
                   onMouseEnter={() => setActiveChallenge(index)}
                   onMouseLeave={() => setActiveChallenge(null)}
                 >
-                  <div className="challenge-icon">{challenge.icon}</div>
                   <h4 className="challenge-title">{challenge.title}</h4>
                   <p className="challenge-description">{challenge.description}</p>
                 </div>

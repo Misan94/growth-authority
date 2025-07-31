@@ -8,7 +8,7 @@ export default function Hero() {
   const [videoCanPlay, setVideoCanPlay] = useState(true)
   const [isMobile, setIsMobile] = useState(false)
   
-  const words = ['Growth', 'Revenue', 'Acquisition', 'Retention']
+  const words = ['Growth', 'Revenue', 'Retention']
 
   useEffect(() => {
     setIsClient(true)
@@ -164,7 +164,7 @@ export default function Hero() {
       <div className="container">
         <div className="hero-content">
           <h1 className="hero-title">
-            The <em>Private Membership</em> for CMOs and Leaders Who Drive{' '}
+            The <em>Private Membership</em> for CMOs and Marketing Leaders Who Drive{' '}
             <span className="typewriter-text">
               {currentText}
             </span>

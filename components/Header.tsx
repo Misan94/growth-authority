@@ -41,7 +41,7 @@ export default function Header() {
       <header className={`header ${isScrolled ? 'scrolled' : ''}`}>
         <nav className="nav-container">
           <div className="logo">
-            <h2>Growth Authority</h2>
+            <img src="/headerlogo.svg" alt="Growth Authority" className="logo-image" />
           </div>
           <div 
             className={`hamburger ${isMenuOpen ? 'active' : ''}`}
@@ -65,7 +65,7 @@ export default function Header() {
       <div className={`side-nav ${isMenuOpen ? 'active' : ''}`}>
         <div className="side-nav-header">
           <div className="side-nav-logo">
-            <h3>Growth Authority</h3>
+            <img src="/footerlogo.svg" alt="Growth Authority" className="side-nav-logo-image" />
           </div>
           <button 
             className="close-btn" 

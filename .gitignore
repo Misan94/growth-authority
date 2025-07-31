@@ -71,3 +71,5 @@ pids
 # Temporary folders
 tmp/
 temp/ 
+# Environment variables
+.env.local

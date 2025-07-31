@@ -6,8 +6,7 @@ export default function Footer() {
           {/* Brand Section */}
           <div className="footer-brand">
             <div className="brand-logo">
-              <div className="logo-icon">GA</div>
-              <span className="brand-name">Growth Authority</span>
+              <img src="/footerlogo.svg" alt="Growth Authority" className="footer-logo-image" />
             </div>
             <p className="brand-description">
               The exclusive community for senior marketing leaders who are serious about 
