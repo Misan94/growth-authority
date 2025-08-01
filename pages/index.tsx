@@ -5,7 +5,6 @@ import Stats from '@/components/Stats'
 import Welcome from '@/components/Welcome'
 import WhyExists from '@/components/WhyExists'
 import Services from '@/components/Services'
-import Companies from '@/components/Companies'
 import WhatYouGet from '@/components/WhatYouGet'
 import WhoItsFor from '@/components/WhoItsFor'
 import FAQ from '@/components/FAQ'
@@ -89,7 +88,6 @@ export default function Home() {
         <Welcome />
         <WhyExists />
         <Services />
-        <Companies />
         <WhatYouGet />
         <WhoItsFor />
         <FAQ />

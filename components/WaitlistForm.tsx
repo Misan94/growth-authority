@@ -192,7 +192,7 @@ export default function WaitlistForm() {
         <form onSubmit={handleSubmit} className="waitlist-form">
           <div className="form-content">
             <div className="form-step">
-              <h3>About You</h3>
+              <h3>Tell Us About You</h3>
               <div className="form-grid">
                 <div className="form-group">
                   <label htmlFor="firstName">First Name *</label>
