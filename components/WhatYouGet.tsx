@@ -155,7 +155,20 @@ export default function WhatYouGet() {
         <div className="bottom-cta">
           <div className="cta-content">
             <h3>Everything is designed to save you time, boost your impact, and hit your KPIs</h3>
-            <button className="primary-cta-btn">Get Full Access Now</button>
+            <button 
+              className="primary-cta-btn"
+              onClick={() => {
+                const waitlistElement = document.getElementById('waitlist')
+                if (waitlistElement) {
+                  waitlistElement.scrollIntoView({ 
+                    behavior: 'smooth', 
+                    block: 'start' 
+                  })
+                }
+              }}
+            >
+              Get Full Access Now
+            </button>
           </div>
         </div>
       </div>

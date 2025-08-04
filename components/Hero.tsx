@@ -65,9 +65,13 @@ export default function Hero() {
   }, [currentText, currentIndex, isDeleting, isClient, words])
 
   const handleWaitlistClick = () => {
-    // Add loading state and waitlist functionality
-    console.log('Waitlist signup clicked')
-    // In a real app, this would handle the waitlist signup
+    const waitlistElement = document.getElementById('waitlist')
+    if (waitlistElement) {
+      waitlistElement.scrollIntoView({ 
+        behavior: 'smooth', 
+        block: 'start' 
+      })
+    }
   }
 
   const handleImageLoad = (e: React.SyntheticEvent<HTMLImageElement>) => {

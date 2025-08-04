@@ -65,7 +65,20 @@ export default function WhyExists() {
                 </div>
                 <p className="highlighted-choice">Build alongside peers, doing the work, sharing the systems, and growing with you.</p>
               </div>
-              <button className="cta-button">Join Growth Authority</button>
+              <button 
+                className="cta-button"
+                onClick={() => {
+                  const waitlistElement = document.getElementById('waitlist')
+                  if (waitlistElement) {
+                    waitlistElement.scrollIntoView({ 
+                      behavior: 'smooth', 
+                      block: 'start' 
+                    })
+                  }
+                }}
+              >
+                Join Growth Authority
+              </button>
             </div>
           </div>
         </div>

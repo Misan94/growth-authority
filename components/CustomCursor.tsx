@@ -1,25 +1,38 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 
 export default function CustomCursor() {
-  const [position, setPosition] = useState({ x: 0, y: 0 })
+  const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 })
+  const [followerPosition, setFollowerPosition] = useState({ x: 0, y: 0 })
   const [isVisible, setIsVisible] = useState(false)
   const [isClicking, setIsClicking] = useState(false)
   const [isHovering, setIsHovering] = useState(false)
-  const [isTextHover, setIsTextHover] = useState(false)
+  
+  const followerRef = useRef<{ x: number; y: number }>({ x: 0, y: 0 })
+  const animationRef = useRef<number>()
 
   useEffect(() => {
-    let animationId: number
-
     const updateCursor = (e: MouseEvent) => {
-      animationId = requestAnimationFrame(() => {
-        setPosition({ x: e.clientX, y: e.clientY })
-        if (!isVisible) setIsVisible(true)
+      setCursorPosition({ x: e.clientX, y: e.clientY })
+      if (!isVisible) setIsVisible(true)
+    }
+
+    const animateFollower = () => {
+      const dx = cursorPosition.x - followerRef.current.x
+      const dy = cursorPosition.y - followerRef.current.y
+      
+      followerRef.current.x += dx * 0.1
+      followerRef.current.y += dy * 0.1
+      
+      setFollowerPosition({
+        x: followerRef.current.x,
+        y: followerRef.current.y
       })
+      
+      animationRef.current = requestAnimationFrame(animateFollower)
     }
 
     const handleMouseDown = () => setIsClicking(true)
     const handleMouseUp = () => setIsClicking(false)
-
     const handleMouseEnter = () => setIsVisible(true)
     const handleMouseLeave = () => setIsVisible(false)
 
@@ -29,16 +42,10 @@ export default function CustomCursor() {
       
       // Check for interactive elements
       const isInteractive = target.matches(
-        'a, button, input, textarea, select, [role="button"], .btn-primary, .btn-secondary, .btn-outline, .hamburger, .social-link, .tab-button, .criteria-card, .benefit-category, .challenge-card, .faq-item, .testimonial-card, .service-card'
-      )
-      
-      // Check for text elements
-      const isText = target.matches(
-        'h1, h2, h3, h4, h5, h6, p, span, div, .hero-title, .section-title, .brand-name, .typewriter-text'
+        'a, button, input, textarea, select, [role="button"], .btn-primary, .btn-secondary, .btn-outline, .hamburger, .social-link, .tab-button, .who-card, .benefit-category, .challenge-card, .faq-item, .testimonial-card, .service-card'
       )
       
       setIsHovering(isInteractive)
-      setIsTextHover(isText && !isInteractive)
     }
 
     document.addEventListener('mousemove', updateCursor)
@@ -48,6 +55,8 @@ export default function CustomCursor() {
     document.addEventListener('mouseenter', handleMouseEnter)
     document.addEventListener('mouseleave', handleMouseLeave)
 
+    animationRef.current = requestAnimationFrame(animateFollower)
+
     return () => {
       document.removeEventListener('mousemove', updateCursor)
       document.removeEventListener('mousemove', handleElementHover)
@@ -55,32 +64,32 @@ export default function CustomCursor() {
       document.removeEventListener('mouseup', handleMouseUp)
       document.removeEventListener('mouseenter', handleMouseEnter)
       document.removeEventListener('mouseleave', handleMouseLeave)
-      if (animationId) {
-        cancelAnimationFrame(animationId)
+      
+      if (animationRef.current) {
+        cancelAnimationFrame(animationRef.current)
       }
     }
-  }, [isVisible])
+  }, [cursorPosition.x, cursorPosition.y, isVisible])
 
   return (
     <>
+      {/* Main cursor dot */}
       <div
-        className={`custom-cursor ${isVisible ? 'visible' : ''} ${isClicking ? 'clicking' : ''} ${isHovering ? 'hovering' : ''} ${isTextHover ? 'text-hover' : ''}`}
+        className={`cursor-dot ${isVisible ? 'visible' : ''} ${isClicking ? 'clicking' : ''} ${isHovering ? 'hovering' : ''}`}
         style={{
-          left: `${position.x}px`,
-          top: `${position.y}px`,
+          left: `${cursorPosition.x}px`,
+          top: `${cursorPosition.y}px`,
         }}
-      >
-        <div className="cursor-dot"></div>
-      </div>
+      />
+      
+      {/* Following circle */}
       <div
-        className={`custom-cursor-ring ${isVisible ? 'visible' : ''} ${isClicking ? 'clicking' : ''} ${isHovering ? 'hovering' : ''} ${isTextHover ? 'text-hover' : ''}`}
+        className={`cursor-follower ${isVisible ? 'visible' : ''} ${isClicking ? 'clicking' : ''} ${isHovering ? 'hovering' : ''}`}
         style={{
-          left: `${position.x}px`,
-          top: `${position.y}px`,
+          left: `${followerPosition.x}px`,
+          top: `${followerPosition.y}px`,
         }}
-      >
-        <div className="cursor-ring"></div>
-      </div>
+      />
     </>
   )
 } 

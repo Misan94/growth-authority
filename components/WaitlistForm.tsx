@@ -117,7 +117,7 @@ export default function WaitlistForm() {
   // Show success message if submission was successful
   if (submissionStatus === 'success') {
     return (
-      <section className="waitlist-form-section">
+      <section id="waitlist" className="waitlist-form-section">
         {/* Video Background */}
         <div className="waitlist-video-container">
           <div className={`waitlist-fallback-bg ${!videoCanPlay || isMobile ? 'active' : ''}`}></div>
@@ -161,7 +161,7 @@ export default function WaitlistForm() {
   if (!isClient) return null
 
   return (
-    <section className="waitlist-form-section">
+    <section id="waitlist" className="waitlist-form-section">
       {/* Video Background */}
       <div className="waitlist-video-container">
         <div className={`waitlist-fallback-bg ${!videoCanPlay || isMobile ? 'active' : ''}`}></div>

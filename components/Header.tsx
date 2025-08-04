@@ -116,9 +116,21 @@ export default function Header() {
           </nav>
 
           <div className="side-nav-cta">
-            <a href="#waitlist" className="side-cta-btn" onClick={closeMenu}>
+            <button 
+              className="side-cta-btn" 
+              onClick={() => {
+                const waitlistElement = document.getElementById('waitlist')
+                if (waitlistElement) {
+                  waitlistElement.scrollIntoView({ 
+                    behavior: 'smooth', 
+                    block: 'start' 
+                  })
+                }
+                closeMenu()
+              }}
+            >
               Join Waitlist
-            </a>
+            </button>
             <a href="#login" className="side-login-btn" onClick={closeMenu}>
               Member Login
             </a>
