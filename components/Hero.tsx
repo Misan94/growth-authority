@@ -96,7 +96,7 @@ export default function Hero() {
         {/* Image background - displays on all devices */}
         <img 
           className={`hero-image ${videoCanPlay ? 'loaded' : ''}`}
-          src="https://cdn.midjourney.com/414ce1ca-d9b3-48e4-95ce-2136baeaac8a/0_0.png"
+          src="/hero-background.png"
           alt="Growth Authority Hero Background"
           onLoad={handleImageLoad}
           onError={handleImageError}
